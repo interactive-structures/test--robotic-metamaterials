@@ -1,5 +1,5 @@
 #include "SimuAn.hpp"
-#include "cppopt/cppOpt.h"
+#include "cppOpt.h"
 
 #include <fstream>
 #include <stdlib.h>

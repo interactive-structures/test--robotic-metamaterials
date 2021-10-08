@@ -1,7 +1,7 @@
 #ifndef __MYNLP_HPP__
 #define __MYNLP_HPP__
 
-#include "coin/IpTNLP.hpp"
+#include "IpTNLP.hpp"
 #include "MetaGrid.hpp"
 
 using namespace Ipopt;

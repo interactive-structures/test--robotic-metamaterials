@@ -1,8 +1,7 @@
 #include "GridModel.h"
 #include "MetaGrid.hpp"
-#include "coin/IpIpoptApplication.hpp"
-#include "coin/IpSolveStatistics.hpp"
-#include "cppopt/cppOpt.h"
+#include "IpIpoptApplication.hpp"
+#include "IpSolveStatistics.hpp"
 #include "MyNLP.hpp"
 
 #include <fstream>

@@ -154,12 +154,12 @@ std::vector<std::vector<double> > anglesFromFolder(std::string anglesFolder)
 int main(int argc, char *argv[])
 {
   GridModel gm;
-  gm.loadFromFile("../inputs/overview/cells_overview_7x7_large_squiggle.txt"); // Specify input file
-  std::string folder = "../results/overview/7x7_large_squiggle/";   // Specify output folder
+  gm.loadFromFile("../example-data/inputs/overview/cells_overview_7x7_large_squiggle.txt"); // Specify input file
+  std::string folder = "../example-data/results/overview/7x7_large_squiggle/";   // Specify output folder
   std::string pointsFolder = folder + "points/";
   std::string anglesFolder = folder + "angles/";
 
-  std::filesystem::create_directory(folder);
+  std::filesystem::create_directories(folder);
   std::filesystem::create_directory(pointsFolder);
   std::filesystem::create_directory(anglesFolder);
 
@@ -169,7 +169,8 @@ int main(int argc, char *argv[])
   // abort();
 
   SimAnnMan sa(gm, folder);            // Initialize simulated annealing, specifying output folder
-  sa.runSimulatedAnnealing(100, 0.97); // Run simulated annealing
+  sa.runSimulatedAnnealing(1, 0.97); // Run simulated annealing
+  //sa.runSimulatedAnnealing(100, 0.97); // Run simulated annealing
 
   gm = sa.bestModel;           // Get best model from simulated annealing
   auto ret = optimize(gm, ""); // run optimize to get grid position at each frame
