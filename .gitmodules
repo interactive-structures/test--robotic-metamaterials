@@ -1,0 +1,3 @@
+[submodule "dependencies/libigl"]
+	path = dependencies/libigl
+	url = https://github.com/libigl/libigl.git
