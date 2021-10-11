@@ -1,6 +1,7 @@
 
 
-./__build
+./__build/
+./example-data/
 
 
 
