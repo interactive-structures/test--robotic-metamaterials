@@ -1,5 +1,11 @@
 # Robotic Metamaterials
- 
+
+Moved everything back to https://github.com/interactive-structures/dynamic-metamaterial-mechanisms
+
+**do not use this repository anymore**
+
+
+<!--
 ## Dependencies
 This project uses the following dependencies:
 - [libigl](https://github.com/libigl/libigl/) for geometry processing. See the [libigl tutorial](https://libigl.github.io/tutorial/)
@@ -51,7 +57,9 @@ Tested on
 - using Intel MKL ([Intel® oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#base-kit))
 - using Intel Fortran compiler ([Intel® oneAPI HPC Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html#hpc-kit))
 
-<!-- 
+
+
+
 cmake ../ -DIPOPT_DIR:PATH=./dependencies/Ipopt/libWIN/lib
 
 
@@ -62,7 +70,7 @@ Linked:
 
 
 Additional instructions: I use Intel MKL, instruct MSVC in VS project properties to use it (needs to be installed and added to Path, TODO: copy contents of path for reference!)
--->
+
 
 
 
@@ -113,3 +121,4 @@ First version from 2018, as published at ACM CHI 2019.
 - Code repository:  https://github.com/alexiiion/2018-MetamaterialMechanismsOptimization
     - Simulation in C++ using Ipopt
     - UI in C# using .NET WPF, which is Windows only
+-->
