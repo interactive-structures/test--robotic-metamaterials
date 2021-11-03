@@ -1,8 +1,6 @@
-# Robotic Metamaterials
+# Moved everything back to https://github.com/interactive-structures/dynamic-metamaterial-mechanisms
 
-Moved everything back to https://github.com/interactive-structures/dynamic-metamaterial-mechanisms
-
-**do not use this repository anymore**
+# **do not use this repository anymore**
 
 
 <!--
