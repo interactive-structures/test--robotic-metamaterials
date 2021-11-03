@@ -60,24 +60,52 @@ include_directories("${DEPENDENCIES_DIR}/cppOpt/inc")
 
 
 # Include & link Ipopt lib
-include_directories("${DEPENDENCIES_DIR}/Ipopt/include/coin-or")
+
+# message("before set IPOPT_DIR = ${IPOPT_DIR}")
+# set(IPOPT_DIR CACHE PATH "Ipopt top-level directory")
+# message("after set IPOPT_DIR = ${IPOPT_DIR}")
+
+# if(NOT ${IPOPT_DIR})
+#     message("IPOPT_DIR is not set")
+# endif()
 
 if(WIN32)
+    include_directories("${DEPENDENCIES_DIR}/Ipopt/include/coin-or")
+
 	set(IPOPT_DIR "${DEPENDENCIES_DIR}/Ipopt/libWIN" CACHE PATH "directory where Ipopt lib is found")
-	set(IPOPT_LIB "ipopt.dll.lib" CACHE STRING "name of Ipopt lib (without .lib extension)")
-	find_library(IPOPT_PATH "${IPOPT_LIB}" PATHS "${IPOPT_DIR}/lib")
+    link_directories("${IPOPT_DIR}/lib")
+    link_libraries("ipopt.dll.lib")
 
-	if ("${IPOPT_LIB}" MATCHES "NOTFOUND")
-		message("ERROR: Could not find Ipopt lib for Windows.\n")
-	else()
-		message("Found Ipopt library for windows at ${IPOPT_PATH}")
-		link_directories("${IPOPT_DIR}/lib")
-		link_libraries("${IPOPT_LIB}")
-		include_directories("${IPOPT_DIR}/bin")
-	endif()
+
+    # find_library(IPOPT_LIB 
+    #     "ipopt" 
+    #     PATHS "${IPOPT_DIR}" "${IPOPT_DIR}/lib" "${DEPENDENCIES_DIR}/Ipopt/libWIN/lib"
+    #     )
+    # message("after find_library IPOPT_LIB = ${IPOPT_LIB}")
+
+    # if (${IPOPT_LIB} MATCHES "NOTFOUND")
+    #     message("ERROR: Could not find Ipopt lib for Windows.")
+    # else()
+    #     get_filename_component(IPOPT_LIB_FILE "${IPOPT_LIB}" NAME)
+    #     link_libraries(${IPOPT_LIB_FILE})
+    #     message("Found Ipopt library for Windows named ${IPOPT_LIB_FILE}")
+        
+    #     get_filename_component(IPOPT_LIB_PATH "${IPOPT_LIB}" DIRECTORY)
+    #     link_directories(${IPOPT_LIB_PATH})
+    #     message("Found Ipopt library for Windows at ${IPOPT_LIB_PATH}")
+    #     set(IPOPT_DIR "${IPOPT_LIB_PATH}/../")
+    #     message("IPOPT_DIR = ${IPOPT_DIR}")
+        
+    #     find_file(IPOPT_INC "*.h*" PATHS "${IPOPT_DIR}" "${DEPENDENCIES_DIR}/Ipopt/include/coin-or")
+    #     message("IPOPT_INC = ${IPOPT_INC}")
+
+    #     include_directories("${DEPENDENCIES_DIR}/Ipopt/include/coin-or")
+    # endif()
+elseif(APPLE)
+    message("TODO implement finding Ipopt on MACOSX")
+    message("Please run cmake again and specify the top-level directory of your Ipopt impmenentation:\n
+            'make ../ -DIPOPT_DIR:PATH=<path/to/your/Ipopt>'")
 endif()
-
-
 
 
 #################################
@@ -145,6 +173,15 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
+
+# WIN: post-build event to copy Ipopt dlls to target directory 
+if(WIN32)
+message("post build IPOPT_DIR = ${IPOPT_DIR}")
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${IPOPT_DIR}/bin"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+endif()
 
 
 # # Add your project files

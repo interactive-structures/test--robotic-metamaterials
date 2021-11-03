@@ -1,4 +1,4 @@
+./__build/*
+./build/*
 
-
-./__build/
-./example-data/
+./example-data/results/
